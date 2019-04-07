@@ -1,0 +1,4 @@
+.idea
+.babel.config.js
+.rollup.config.js
+*.test.*
