@@ -5,6 +5,9 @@
  */
 
 
+import {lineCapTypes, repetitionTypes} from "../utils/constants";
+import Font from "../style/Font";
+
 /**
  * clearCanvas
  * @param ctx
@@ -96,3 +99,65 @@ function measureFontHeight(fontStyle) {
 	}
 	return end - start;
 }
+
+
+function demo(ctx) {
+	const image = new Image();
+
+
+	/**
+	 * method
+	 */
+	// fillRect: rect() + fill()
+	ctx.fillRect(x, y, width, height);
+
+
+	// createLinearGradient(x0, y0, x1, y1)
+	const lineGradient = ctx.createLinearGradient(0, 0, 100, 100);
+	lineGradient.addColorStop(0, 'green');
+	lineGradient.addColorStop(1, 'red');
+
+	// createRadialGradient(x0, y0, r0, x1, y1, r1)
+	// https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/createRadialGradient
+	const radialGradient = ctx.createRadialGradient(0, 0, 10, 100, 100, 10);
+	radialGradient.addColorStop(0, 'green');
+	radialGradient.addColorStop(0, 'green');
+
+	// createPatten(image, repetition)
+	const pattern = ctx.createPattern(image, repetitionTypes.repeat);
+
+	/**
+	 * property
+	 */
+
+	// fileStyle: css color(rgba, #111) || gradient || pattern
+	ctx.fillStyle = 'red' || lineGradient || radialGradient || pattern;
+	// font: css font string
+	ctx.font = new Font();
+	// globalAlpha
+	ctx.globalAlpha = 0.5;
+	// imageSmoothingEnabled
+	ctx.imageSmoothingEnabled = false;
+	// lineCap: work for stroke(), strokeRect(), strokeText()
+	ctx.lineCap = lineCapTypes.round;
+	// lineDashOffset
+	ctx.lineDashOffset = 0.0
+
+
+
+	/// https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineJoin
+}
+
+
+/**
+ * load remote font resource
+ * return promise which will return when font can be used in canvas
+ * @param fontName
+ * @param resourceUrl
+ */
+function loadFont(fontName, resourceUrl) {
+	let f = new window.FontFace('test', `url(${resourceUrl})`);
+	return f.load();
+}
+
+

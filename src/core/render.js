@@ -87,12 +87,4 @@ class Render {
 	}
 }
 
-let render = {
-	instance: null,
-	init(ctx) {
-		this.instance = new Render(ctx);
-		render = this.instance;
-	}
-};
-
-export default render;
+export default Render;

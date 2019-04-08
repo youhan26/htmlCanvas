@@ -3,7 +3,7 @@ import Resource from './resource';
 import {isSupportCanvas} from "./utils";
 import factory from './element';
 import {toStyle} from "./utils/handleUnit";
-import render from "./core/render";
+import engine from "./core/engine";
 
 const defaultSize = 100;
 
@@ -23,7 +23,7 @@ class Canvas {
 
 
 		this.resource = new Resource(this.sourceLoadFinish);
-		this.render = render(this.ctx, {svg: false, node: false});
+		engine.init(this.ctx, {svg: false, node: false});
 	}
 
 	sourceLoadFinish() {

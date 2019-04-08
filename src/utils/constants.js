@@ -28,3 +28,36 @@ export const textDecorationTypes = {
 	lineThrough: 'line-through',
 	underline: 'underline',
 };
+
+
+/**
+ * createPattern repetition
+ * @type {{repeat: string, repeat-X: string, repeat-y: string, no-repeat: string}}
+ */
+export const repetitionTypes = {
+	'repeat': 'repeat',
+	'repeat-X': 'repeat-x',
+	'repeat-y': 'repeat-y',
+	'no-repeat': 'no-repeat'
+};
+
+/**
+ * lineCapTypes
+ * @type {{butt: string, round: string, square: string}}
+ */
+export const lineCapTypes = {
+	butt: 'butt', //default
+	round: 'round',
+	square: 'square'
+};
+
+
+/**
+ * lineJoinTypes
+ * @type {{bevel: string, round: string, miter: string}}
+ */
+export const lineJoinTypes = {
+	bevel: 'bevel',
+	round: 'round',
+	miter: 'miter' // default
+};
