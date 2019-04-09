@@ -4,17 +4,20 @@
  * file: handleUnit.js
  */
 
-export const defaultUnit = 'px';
-export const defaultStyle = '10px';
+import {defaultUnit} from "./constants";
 
 /**
- * @name toStyle
- * @params number
+ * getStyle
+ * @param style
+ * @param withUnit
+ * @param defaultUnit
+ * @returns {*}
  */
-export function toStyle(number, defaultStyle = defaultStyle) {
-	const n = parseFloat(number);
-	if (isNaN(n)) {
-		return defaultStyle;
+export function getStyle(style = '', withUnit = false, defaultUnit = defaultUnit){
+	const match = String(style).match(/(\d+(?:.\d+)?)(\S+)/);
+	if(match){
+		const [_, num, unit] = match;
+		return parseFloat(num) + withUnit ? unit || defaultUnit : '';
 	}
-	return n + defaultUnit;
+	return null;
 }

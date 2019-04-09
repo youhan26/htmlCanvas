@@ -2,10 +2,10 @@ import DomSelector from 'react-native-dom-parser';
 import Resource from './resource';
 import {isSupportCanvas} from "./utils";
 import factory from './element';
-import {toStyle} from "./utils/handleUnit";
+import {getStyle} from "./utils/handleUnit";
 import engine from "./core/engine";
+import {defaultCanvasSize, defaultUnit} from "./utils/constants";
 
-const defaultSize = 100;
 
 
 class Canvas {
@@ -18,7 +18,7 @@ class Canvas {
 			console.warn('not support canvas');
 		}
 
-		const {width = defaultSize, height = defaultSize, ...others} = config;
+		const {width = defaultCanvasSize, height = defaultCanvasSize, ...others} = config;
 		(width || height ) && this.updateStyle(width, height);
 
 
@@ -35,8 +35,8 @@ class Canvas {
 		if (!this.el) {
 			return;
 		}
-		const styleWidth = toStyle(width);
-		const styleHeight = toStyle(height);
+		const styleWidth = getStyle(width, true, defaultUnit);
+		const styleHeight = getStyle(height, true, defaultUnit);
 		this.el.style.width = styleWidth;
 		this.el.style.height = styleHeight;
 		this.el.width = styleWidth;

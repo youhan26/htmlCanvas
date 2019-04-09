@@ -10,6 +10,14 @@ export const componentTypes = {
 	abstract: 'abstract'
 };
 
+
+/**
+ * defaultUnit
+ * @type {string}
+ */
+export const defaultUnit = 'px';
+export const defaultCanvasSize = 500;
+
 /**
  * rect shape type
  * @type {{fill: string, stroke: string}}
@@ -66,9 +74,35 @@ export const lineJoinTypes = {
 export const defaultShadowBlur = 10;
 
 
+/**
+ * textAlignTypes
+ * @type {{left: string, right: string, center: string}}
+ */
 export const textAlignTypes = {
 	left: 'left',
 	right: 'right',
 	center: 'center'
+};
+
+/**
+ * textBaseLineTypes
+ * @type {{top: string, hanging: string, middle: string, alphabetic: string, ideographic: string, bottom: string}}
+ */
+export const textBaseLineTypes = {
+	top: 'top', //文本基线在文本块的顶部
+	hanging: 'hanging',  //文本基线是悬挂基线
+	middle: 'middle',    //文本基线在文本块的中间
+	alphabetic: 'alphabetic',  // 文本基线是标准的字母基线  default
+	ideographic: 'ideographic', // 文字基线是表意字基线；如果字符本身超出了alphabetic 基线，那么ideograhpic基线位置在字符本身的底部。
+	bottom: 'bottom' //文本基线在文本块的底部。 与 ideographic 基线的区别在于 ideographic 基线不需要考虑下行字母。
+};
+
+/**
+ * clockwiseTypes
+ * @type {{false: boolean, true: boolean}}
+ */
+export const clockwiseTypes = {
+	clockwise: false,      // 順時針 default
+	anticlockwise: true    // 逆時針
 };
 

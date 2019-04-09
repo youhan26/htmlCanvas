@@ -5,8 +5,13 @@
  */
 
 
-import {defaultShadowBlur, lineCapTypes, lineJoinTypes, repetitionTypes, textAlignTypes} from "../utils/constants";
+import {
+	clockwiseTypes, defaultCanvasSize,
+	defaultShadowBlur, lineCapTypes, lineJoinTypes, repetitionTypes, textAlignTypes,
+	textBaseLineTypes
+} from "../utils/constants";
 import Font from "../style/Font";
+import {getStyle} from "../utils/handleUnit";
 
 /**
  * clearCanvas
@@ -100,10 +105,31 @@ function measureFontHeight(fontStyle) {
 	return end - start;
 }
 
+/**
+ * getCanvasSize
+ * @param canvas
+ * @returns {{width: *, height: *}}
+ */
+function getCanvasSize(canvas) {
+	return {
+		width: getStyle(canvas.width) || getStyle(canvas.style.width) || defaultCanvasSize,
+		height: getStyle(canvas.height) || getStyle(canvas.style.height) || defaultCanvasSize
+	};
+}
+
+/**
+ * clear canvas
+ * @param ctx
+ * @param canvas
+ */
+function clear(ctx, canvas) {
+	const {width, height} = getCanvasSize(canvas);
+	ctx.clearRect(0, 0, width, height);
+}
+
 
 function demo(ctx) {
 	const image = new Image();
-
 
 	/**
 	 * method
@@ -126,6 +152,26 @@ function demo(ctx) {
 	// createPatten(image, repetition)
 	const pattern = ctx.createPattern(image, repetitionTypes.repeat);
 
+	// arc(x, y, radius, startAngle, endAngle, anticlockwise)
+	ctx.arc(50, 50, 50, 0, degreeToAngle(180), clockwiseTypes.clockwise);
+	// arcTo(x0, y0, x1, y1, radius) 二次貝塞爾曲綫: 控制點：x0, y0, 终点： x1, y1
+	ctx.arcTo(20, 20, 100, 100, 100);
+	// beginPath
+	ctx.beginPath();
+	// bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y) 三次贝塞尔曲线： 控制点 cp1, cp2，终点：x, y
+	ctx.bezierCurveTo(20, 20, 100, 100, 50, 50);
+	// clearRect(x, y, width, height)
+	ctx.clearRect(0, 0, 500, 500);
+	// TODO clip
+	ctx.clip();
+	// closePath()  Canvas 2D API 将笔点返回到当前子路径起始点的方法。它尝试从当前点到起始点绘制一条直线。 如果图形已经是封闭的或者只有一个点，那么此方法不会做任何操作
+	ctx.closePath();
+	// TODO createImageData(width, height) / createImageData(imageData)
+	ctx.createImageData(100, 100); //ImageData { width: 100, height: 100, data: Uint8ClampedArray[40000] }
+
+
+
+
 	/**
 	 * property
 	 */
@@ -141,7 +187,7 @@ function demo(ctx) {
 	// lineCap: work for stroke(), strokeRect(), strokeText()
 	ctx.lineCap = lineCapTypes.round;
 	// lineDashOffset
-	ctx.lineDashOffset = 0.0
+	ctx.lineDashOffset = 0.0;
 	// lineJoin
 	ctx.lineJoin = lineJoinTypes.miter;
 	// lineWidth: work for stroke(), strokeRect(), strokeText()
@@ -158,7 +204,8 @@ function demo(ctx) {
 	ctx.strokeStyle = 'red' || lineGradient || radialGradient || pattern;
 	// textAlign
 	ctx.textAlign = textAlignTypes.center;
-
+	// textBaseLineTypes
+	ctx.textBaseLineTypes = textBaseLineTypes.middle;
 
 
 	/// https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineJoin
@@ -176,4 +223,12 @@ function loadFont(fontName, resourceUrl) {
 	return f.load();
 }
 
+
+function degreeToAngle(number) {
+	return number / 360 * 2 * Math.PI;
+}
+
+function angleToDegree(angle) {
+	return angle / 2 / Math.PI * 360;
+}
 
