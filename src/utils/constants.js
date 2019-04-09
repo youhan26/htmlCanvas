@@ -61,3 +61,14 @@ export const lineJoinTypes = {
 	round: 'round',
 	miter: 'miter' // default
 };
+
+
+export const defaultShadowBlur = 10;
+
+
+export const textAlignTypes = {
+	left: 'left',
+	right: 'right',
+	center: 'center'
+};
+

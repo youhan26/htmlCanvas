@@ -5,7 +5,7 @@
  */
 
 
-import {lineCapTypes, repetitionTypes} from "../utils/constants";
+import {defaultShadowBlur, lineCapTypes, lineJoinTypes, repetitionTypes, textAlignTypes} from "../utils/constants";
 import Font from "../style/Font";
 
 /**
@@ -142,6 +142,22 @@ function demo(ctx) {
 	ctx.lineCap = lineCapTypes.round;
 	// lineDashOffset
 	ctx.lineDashOffset = 0.0
+	// lineJoin
+	ctx.lineJoin = lineJoinTypes.miter;
+	// lineWidth: work for stroke(), strokeRect(), strokeText()
+	// min work value >=1. 0.1 will work like opacity and width is 1
+	ctx.lineWidth = 1;
+	// shadowBlur
+	ctx.shadowBlur = defaultShadowBlur;
+	// shadowColor
+	ctx.shadowColor = 'green';
+	// shadowOffsetX, shadowOffsetY: float type
+	ctx.shadowOffsetX = 10;
+	ctx.shadowOffsetY = 10;
+	// strokeStyle
+	ctx.strokeStyle = 'red' || lineGradient || radialGradient || pattern;
+	// textAlign
+	ctx.textAlign = textAlignTypes.center;
 
 
 
