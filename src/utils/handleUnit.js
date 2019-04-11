@@ -14,10 +14,10 @@ import {defaultUnit} from "./constants";
  * @returns {*}
  */
 export function getStyle(style = '', withUnit = false, defaultUnit = defaultUnit){
-	const match = String(style).match(/(\d+(?:.\d+)?)(\S+)/);
+	const match = String(style).match(/(\d+(?:.\d+)?)(\S*)/);
 	if(match){
 		const [_, num, unit] = match;
-		return parseFloat(num) + withUnit ? unit || defaultUnit : '';
+		return parseFloat(num) + (withUnit ? unit || defaultUnit : '');
 	}
 	return null;
 }
