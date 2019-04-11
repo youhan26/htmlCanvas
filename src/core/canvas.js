@@ -7,7 +7,7 @@
 
 import {
 	clockwiseTypes, defaultCanvasSize,
-	defaultShadowBlur, lineCapTypes, lineJoinTypes, repetitionTypes, textAlignTypes,
+	defaultShadowBlur, fillRules, lineCapTypes, lineJoinTypes, repetitionTypes, textAlignTypes,
 	textBaseLineTypes
 } from "../utils/constants";
 import Font from "../style/Font";
@@ -168,8 +168,18 @@ function demo(ctx) {
 	ctx.closePath();
 	// TODO createImageData(width, height) / createImageData(imageData)
 	ctx.createImageData(100, 100); //ImageData { width: 100, height: 100, data: Uint8ClampedArray[40000] }
-
-
+	// ctx.drawImage(image, dx, dy)
+	// ctx.drawImage(image, dx, dy, dWidth, dHeight)
+	// ctx.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight)
+	ctx.drawImage(image, 100, 100);
+	// ctx.ellipse(x, y, xRadius, yRadius, rotation, startAngle, endAngle, anticlockwise)
+	// rotation： 顺时针旋转角度
+	// anticlockwise： 是否逆时针画
+	ctx.ellipse(100, 100, 50, 75, Math.PI / 4, 0, Math.PI, true);
+	// ctx.fill([path][,pathRule]) 填充当前 / 已存在的路径的方法
+	ctx.fill(fillRules.nonzero);
+	// ctx.fillRect(x, y, width, height)
+	ctx.fillRect(0, 0, 100, 100);
 
 
 	/**

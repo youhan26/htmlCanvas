@@ -106,3 +106,13 @@ export const clockwiseTypes = {
 	anticlockwise: true    // 逆時針
 };
 
+
+/**
+ * fillRules
+ * @type {{nonzero: string, evenodd: string}}
+ */
+export const fillRules = {
+	nonzero: 'nonzero', // 非零规则
+	evenodd: 'evenodd'  // 奇偶规则
+}
+
