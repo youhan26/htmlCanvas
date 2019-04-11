@@ -5,6 +5,8 @@
  */
 
 import logger from "../utils/logger";
+import CanvasStyle from "./canvas/CanvasStyle";
+import {getStyle} from "../utils/handleUnit";
 
 /**
  *@name Render
@@ -13,9 +15,40 @@ class Render {
 	constructor(ctx) {
 		this.ctx = ctx;
 
+		this.canvasStyle = new CanvasStyle(this.ctx);
+
 		this.renderRect = this.renderWrapper(this.renderRect);
 		this.renderImage = this.renderWrapper(this.renderImage);
 		this.renderText = this.renderWrapper(this.renderText);
+
+	}
+
+
+	renderRect(option) {
+		const {position, style} = option;
+		const {x, y, width, height} = position;
+		// TODO support  all border css style
+		const {backgroundColor, borderColor, borderWidth, radius} = style;
+
+		const isFill = !borderWidth;
+
+		const updateStyle = {};
+		if (isFill) {
+			updateStyle.fillStyle = backgroundColor;
+		} else {
+			updateStyle.strokeStyle = borderColor;
+			updateStyle.lineWidth = getStyle(borderWidth);
+		}
+
+		this.canvasStyle.update({
+			fillStyle: color,
+			strokeStyle: color
+		});
+
+		if(borderWidth){
+
+		}
+
 	}
 
 	/**
@@ -42,11 +75,6 @@ class Render {
 		};
 	}
 
-	renderRect(option) {
-		const {rectType, radius, startPoint, size = {width, height}, style} = option;
-
-	}
-
 	renderImage(option) {
 
 	}
@@ -56,7 +84,6 @@ class Render {
 		const {font, shadow, textDecoration} = style;
 		const {fontStyle, fontVariant, fontWeight, fontSize, fontFamily} = font;
 		const {shadowColor, shadowOffsetX, shadowOffsetY, shadowBlur} = shadow;
-
 	}
 
 	// new Path2D()
@@ -64,26 +91,6 @@ class Render {
 		this.ctx.beginPath();
 		// draw path
 		this.ctx.closePath();
-	}
-
-	// TODO
-	createRadialGradientStyle() {
-
-	}
-
-	// TODO
-	createLinearGradientStyle() {
-
-	}
-
-	// TODO
-	createImagePatternStyle() {
-
-	}
-
-	// TODO
-	transformMove() {
-
 	}
 }
 

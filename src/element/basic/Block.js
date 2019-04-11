@@ -41,6 +41,8 @@ class Block extends Basic{
 	}
 
 	render(){
-
+		// super.coreRender
 	}
 }
+
+export default Block;

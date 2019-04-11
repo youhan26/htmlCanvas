@@ -74,6 +74,7 @@ class Canvas {
 		}
 
 		const node = convertItem(tempNode);
+		console.log(node);
 		node.render();
 	}
 }

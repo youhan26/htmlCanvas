@@ -1,5 +1,5 @@
-import Component from "../basic/Basic";
 import toCamels from "../../utils/toCamel";
+import Block from "../basic/Block";
 
 /**
  * basic shape: div
@@ -13,9 +13,10 @@ const componentTypes = {
 	abstract: false
 };
 
-class Div extends Component{
+class Div extends Block{
 	constructor(node) {
-		super();
+
+		super(node, node.children);
 
 		const {style, attributes, events, children} = node;
 		this.children = children;
@@ -25,7 +26,7 @@ class Div extends Component{
 
 		this._type = componentTypes.component;
 
-		this.initBox();
+		// this.initBox();
 	}
 
 	render() {

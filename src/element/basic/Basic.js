@@ -1,5 +1,6 @@
 import {isFunction} from "../../utils/is";
 import toCamels from "../../utils/toCamel";
+import engine from "../../core/engine";
 
 
 /**
@@ -34,6 +35,8 @@ class Basic {
 
 		this.initEventHandle();
 		this.initLayer();
+
+		this.coreRender = engine.render;
 	}
 
 	initEventHandle() {
