@@ -52,18 +52,45 @@ function drawRoundLineArea(ctx, x, y, r) {
 }
 
 
+const canvas = {
+	ctx: null,
+	init(ctx) {
+		this.ctx = ctx;
+	},
+	renderRect(x, y, width, height, radius) {
+		if (radius) {
+			this.renderRectWidthRadius(x, y, width, height, radius);
+		} else {
+			this.ctx.fillRect(x, y, width, height);
+		}
+	},
+	renderRectWidthRadius(x, y, width, height, radius) {
+		this.ctx.moveTo(x, y + height / 2);
+		this.ctx.arcTo(x, y, x + width / 2, y, radius);
+		this.ctx.arcTo(x + width, y, x + width, y + height / 2, radius);
+		this.ctx.arcTo(x + width, y + height, x + width / 2, y + height, radius);
+		this.ctx.arcTo(x, y + height, x, y + height / 2, radius);
+	},
+	arcTo(x0, y0, x1, y1) {
+		this.ctx.arcTo(x0, y0, x1, y1);
+	},
+	fill() {
+		this.ctx.fill();
+	},
+	stroke() {
+		this.ctx.stroke();
+	},
+	start() {
+		this.ctx.save();
+		this.ctx.beginPath();
+	},
+	end() {
+		this.ctx.closePath();
+		this.ctx.restore();
+	}
+};
 
-
-
-
-
-
-
-
-
-
-
-
+export default canvas;
 
 
 /**

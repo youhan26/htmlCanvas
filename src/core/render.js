@@ -4,7 +4,6 @@
  * file: index.js
  */
 
-import logger from "../utils/logger";
 import CanvasStyle from "./canvas/CanvasStyle";
 import {getStyle} from "../utils/handleUnit";
 
@@ -13,66 +12,37 @@ import {getStyle} from "../utils/handleUnit";
  */
 class Render {
 	constructor(ctx) {
-		this.ctx = ctx;
-
 		this.canvasStyle = new CanvasStyle(this.ctx);
 
-		this.renderRect = this.renderWrapper(this.renderRect);
-		this.renderImage = this.renderWrapper(this.renderImage);
-		this.renderText = this.renderWrapper(this.renderText);
-
+		canvas.init(ctx);
 	}
 
-
-	renderRect(option) {
-		const {position, style} = option;
+	renderRect(position, style) {
 		const {x, y, width, height} = position;
-		// TODO support  all border css style
-		const {backgroundColor, borderColor, borderWidth, radius} = style;
+		const {color, radius} = style;
 
-		const isFill = !borderWidth;
+		const updateStyle = {
+			lineWidth: 1,
+			fillStyle: color
+		};
 
-		const updateStyle = {};
-		if (isFill) {
-			updateStyle.fillStyle = backgroundColor;
-		} else {
-			updateStyle.strokeStyle = borderColor;
-			updateStyle.lineWidth = getStyle(borderWidth);
-		}
+		this.canvasStyle.update(updateStyle);
 
-		this.canvasStyle.update({
-			fillStyle: color,
-			strokeStyle: color
-		});
-
-		if(borderWidth){
-
-		}
-
+		const r = parseFloat(getStyle(radius));
+		canvas.start();
+		canvas.renderRect(x, y, width, height, r);
+		canvas.fill();
+		canvas.end();
 	}
 
 	/**
 	 * use relative by container position
-	 * @param startPosition
+	 * @param x
+	 * @param y
 	 */
-	translate(startPosition) {
+	translate(x, y) {
 		this.ctx.setTransform(1, 0, 0, 1, 0, 0);
-		const {x, y} = startPosition;
 		this.ctx.translate(x, y);
-	}
-
-	renderWrapper(func) {
-		return (...args) => {
-			let result;
-			this.ctx.save();
-			try {
-				result = func && func(...args);
-			} catch (e) {
-				logger.log(e);
-			}
-			this.ctx.restore();
-			return result;
-		};
 	}
 
 	renderImage(option) {

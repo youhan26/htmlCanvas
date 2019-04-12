@@ -115,4 +115,3 @@ export const fillRules = {
 	nonzero: 'nonzero', // 非零规则
 	evenodd: 'evenodd'  // 奇偶规则
 }
-
