@@ -74,6 +74,13 @@ const canvas = {
 	arcTo(x0, y0, x1, y1) {
 		this.ctx.arcTo(x0, y0, x1, y1);
 	},
+	renderText(text, position){
+		this.ctx.fillText(text, position.x, position.y);
+	},
+	translate(x, y){
+		this.ctx.setTransform(1, 0, 0, 1, 0, 0);
+		this.ctx.translate(x, y);
+	},
 	fill() {
 		this.ctx.fill();
 	},
@@ -91,17 +98,6 @@ const canvas = {
 };
 
 export default canvas;
-
-
-/**
- * drawText
- * @param ctx
- * @param position
- * @param text
- */
-function drawText(ctx, position, text) {
-	ctx.fillText(text, position.x, position.y);
-}
 
 
 /**

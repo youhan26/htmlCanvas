@@ -13,7 +13,6 @@ const defaultStyle = {
 class CanvasStyle {
 	constructor(ctx, style = {}) {
 		this.ctx = ctx;
-		this.ctx.save();
 
 		this.update({
 			...defaultStyle,
@@ -23,7 +22,6 @@ class CanvasStyle {
 
 	update(style) {
 		const that = this;
-		that.ctx.restore();
 
 		const supportStyle = pick(style, [
 			'fillStyle',

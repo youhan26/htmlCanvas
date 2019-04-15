@@ -6,17 +6,23 @@
 
 import CanvasStyle from "./canvas/CanvasStyle";
 import {getStyle} from "../utils/handleUnit";
+import canvas from './canvas';
 
 /**
  *@name Render
  */
 class Render {
 	constructor(ctx) {
-		this.canvasStyle = new CanvasStyle(this.ctx);
+		this.canvasStyle = new CanvasStyle(ctx);
 
 		canvas.init(ctx);
 	}
 
+	/**
+	 * renderRect
+	 * @param position
+	 * @param style
+	 */
 	renderRect(position, style) {
 		const {x, y, width, height} = position;
 		const {color, radius} = style;
@@ -36,26 +42,36 @@ class Render {
 	}
 
 	/**
+	 * renderText
+	 * @param text
+	 * @param position
+	 * @param style
+	 * @param font
+	 */
+	renderText(text, position, style, font) {
+		const {shadow, textDecoration} = style;
+		const {shadowColor, shadowOffsetX, shadowOffsetY, shadowBlur} = shadow;
+
+		const updateStyle = {
+			...style,
+			font,
+		};
+		this.canvasStyle.update(updateStyle);
+		canvas.renderText(text, position);
+	}
+
+	/**
 	 * use relative by container position
 	 * @param x
 	 * @param y
 	 */
 	translate(x, y) {
-		this.ctx.setTransform(1, 0, 0, 1, 0, 0);
-		this.ctx.translate(x, y);
+		canvas.translate(x, y);
 	}
 
 	renderImage(option) {
 
 	}
-
-	renderText(option) {
-		const {style} = option;
-		const {font, shadow, textDecoration} = style;
-		const {fontStyle, fontVariant, fontWeight, fontSize, fontFamily} = font;
-		const {shadowColor, shadowOffsetX, shadowOffsetY, shadowBlur} = shadow;
-	}
-
 	// new Path2D()
 	renderPath(path) {
 		this.ctx.beginPath();

@@ -1,24 +1,16 @@
+import Block from "../basic/Block";
+
 /**
  * basic shape: div
  * @type {{}}
  */
-const defaultStyle = {};
-const componentTypes = {
-	component: 'component',
-	abstract: 'abstract'
-};
-
-class Text {
-	constructor() {
-		this.children = [];
-		this.style = {};
-		this.events = {};
-
-		this._type = componentTypes.component;
+class Text  extends Block{
+	constructor(node) {
+		super(node, node.children);
 	}
 
 	render(){
-
+		super.render();
 	}
 }
 

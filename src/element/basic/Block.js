@@ -6,6 +6,7 @@
 import parseLikeMargin from "../../utils/parseLikeMargin";
 import Basic from "./Basic";
 import {componentTypes} from "../../utils/constants";
+import {getStyle, getStyleNumber} from "../../utils/handleUnit";
 
 class Block extends Basic {
 	constructor(element, children) {
@@ -36,7 +37,10 @@ class Block extends Basic {
 	initPosition() {
 		const {flex, flexDirection, justifyContent, alignItems} = this.style;
 
-		const {width, height} = this.style;
+		let {width, height} = this.style;
+
+		width = getStyleNumber(width);
+		height = getStyleNumber(height);
 
 		this.position = {
 			x: 0,
@@ -60,7 +64,18 @@ class Block extends Basic {
 				width: width + border.left + border.right,
 				height: height + border.top + border.bottom
 			},
-			padding: {}
+			padding: {
+				x: margin.left + border.left,
+				y: margin.top + border.top,
+				width,
+				height
+			},
+			content: {
+				x: margin.left + border.left + padding.left,
+				y: margin.top + border.top + padding.top,
+				width: width - padding.left - padding.right,
+				height: height - padding.top - padding.bottom
+			}
 		};
 	}
 
@@ -69,28 +84,27 @@ class Block extends Basic {
 	}
 
 	renderMargin() {
-		const {top, left} = this.boxStyle.margin;
-		const {x, y} = this.position;
+		const {x, y} = this.size.block;
 		this.translate(x, y);
 	}
 
 	renderBorder() {
-		const {top, left, right, bottom} = this.boxStyle.border;
-		const {borderRadius, borderColor, width, height} = this.style;
-		this.coreRender.renderRect({
-			x: 0, y: 0, width: left + width + right, height: top + height + bottom
-		}, {
+		const {borderRadius, borderColor} = this.style;
+		this.coreRender.renderRect(this.size.border, {
 			color: borderColor,
 			radius: borderRadius
 		});
 	}
 
 	renderPadding() {
-		// todo
+		const {backgroundColor} = this.style;
+		this.coreRender.renderRect(this.size.padding, {
+			color: backgroundColor
+		});
 	}
 
 	renderContent() {
-
+		// TODO
 	}
 
 	render() {

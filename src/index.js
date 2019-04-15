@@ -70,7 +70,7 @@ class Canvas {
 					return convertItem(child);
 				});
 			}
-			return factory.instance(node.tagName, node);
+			return factory.instance(node.tagName || 'text', node);
 		}
 
 		const node = convertItem(tempNode);

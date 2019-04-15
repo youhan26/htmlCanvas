@@ -133,7 +133,7 @@ function demo(ctx) {
 	// strokeStyle
 	ctx.strokeStyle = 'red' || lineGradient || radialGradient || pattern;
 	// font: css font string
-	ctx.font = new Font();
+	ctx.font = new Font().toString();
 	// globalAlpha
 	ctx.globalAlpha = 0.5;
 	// imageSmoothingEnabled
