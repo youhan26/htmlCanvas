@@ -52,29 +52,52 @@ function drawRoundLineArea(ctx, x, y, r) {
 }
 
 
+const canvas = {
+	ctx: null,
+	init(ctx) {
+		this.ctx = ctx;
+	},
+	renderRect(x, y, width, height, radius) {
+		if (radius) {
+			this.renderRectWidthRadius(x, y, width, height, radius);
+		} else {
+			this.ctx.fillRect(x, y, width, height);
+		}
+	},
+	renderRectWidthRadius(x, y, width, height, radius) {
+		this.ctx.moveTo(x, y + height / 2);
+		this.ctx.arcTo(x, y, x + width / 2, y, radius);
+		this.ctx.arcTo(x + width, y, x + width, y + height / 2, radius);
+		this.ctx.arcTo(x + width, y + height, x + width / 2, y + height, radius);
+		this.ctx.arcTo(x, y + height, x, y + height / 2, radius);
+	},
+	arcTo(x0, y0, x1, y1) {
+		this.ctx.arcTo(x0, y0, x1, y1);
+	},
+	renderText(text, position){
+		this.ctx.fillText(text, position.x, position.y);
+	},
+	translate(x, y){
+		this.ctx.setTransform(1, 0, 0, 1, 0, 0);
+		this.ctx.translate(x, y);
+	},
+	fill() {
+		this.ctx.fill();
+	},
+	stroke() {
+		this.ctx.stroke();
+	},
+	start() {
+		this.ctx.save();
+		this.ctx.beginPath();
+	},
+	end() {
+		this.ctx.closePath();
+		this.ctx.restore();
+	}
+};
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-/**
- * drawText
- * @param ctx
- * @param position
- * @param text
- */
-function drawText(ctx, position, text) {
-	ctx.fillText(text, position.x, position.y);
-}
+export default canvas;
 
 
 /**

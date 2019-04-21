@@ -5,19 +5,23 @@
  */
 import pick from "../../utils/pick";
 
-class CanvasStyle{
-	constructor(ctx, style){
-		this.ctx = ctx;
-		this.ctx.save();
+const defaultStyle = {
+	fillStyle: 'white',
+	strokeStyle: 'white'
+};
 
-		if(style){
-			this.update(style);
-		}
+class CanvasStyle {
+	constructor(ctx, style = {}) {
+		this.ctx = ctx;
+
+		this.update({
+			...defaultStyle,
+			...style
+		});
 	}
 
-	update(style){
+	update(style) {
 		const that = this;
-		that.ctx.restore();
 
 		const supportStyle = pick(style, [
 			'fillStyle',
@@ -35,9 +39,9 @@ class CanvasStyle{
 			'textAlign',
 			'textBaseLineTypes',
 		]);
-		Object.keys(supportStyle).forEach(function(key){
+		Object.keys(supportStyle).forEach(function (key) {
 			that.ctx[key] = supportStyle[key];
-		})
+		});
 	}
 }
 
@@ -47,7 +51,7 @@ export default CanvasStyle;
  * unused
  * @param ctx
  */
-function t(ctx){
+function t(ctx) {
 	// fileStyle: css color(rgba, #111) || gradient || pattern
 	ctx.fillStyle = 'red' || lineGradient || radialGradient || pattern;
 // strokeStyle

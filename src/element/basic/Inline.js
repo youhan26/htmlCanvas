@@ -6,14 +6,15 @@
 
 import Basic from "./Basic";
 import {componentTypes} from "../../utils/constants";
-import engine from "../../core/engine";
+import Font from "../../style/Font";
 
-class Inline extends Basic{
-	constructor(element, children){
+class Inline extends Basic {
+	constructor(element, children) {
 		super(element, children);
 
 		this._type = componentTypes.block;
 		this.init();
+		this.text = element.text;
 	}
 
 	init() {
@@ -22,22 +23,20 @@ class Inline extends Basic{
 	}
 
 	initStyle() {
-		const {backgroundColor, color, fontSize} = this.style;
-		const {borderRadius} = this.style;
-		const {width, height} = this.style;
+		const {color} = this.style;
 
-		this.box = {
-			// flex: new Flex(this.style),
-		};
-
-		console.log(this);
+		this.font = new Font(this.style.font || this.style);
 	}
 
 	initPosition() {
 		const {flex, flexDirection, justifyContent, alignItems} = this.style;
+		this.position = {
+			x: 0,
+			y: 0
+		};
 	}
 
-	render(){
-
+	render() {
+		this.coreRender.renderText(this.text);
 	}
 }

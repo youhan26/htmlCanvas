@@ -21,3 +21,13 @@ export function getStyle(style = '', withUnit = false, defaultUnit = defaultUnit
 	}
 	return null;
 }
+
+
+/**
+ * getStyleNumber
+ * @param style
+ * @returns {number}
+ */
+export function getStyleNumber(style){
+	return parseFloat(getStyle(style) || 0);
+}
