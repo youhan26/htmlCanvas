@@ -9,8 +9,8 @@ import {componentTypes} from "../../utils/constants";
 import Font from "../../style/Font";
 
 class Inline extends Basic {
-	constructor(element, children) {
-		super(element, children);
+	constructor(element, children, parent) {
+		super(element, children, parent);
 
 		this._type = componentTypes.block;
 		this.init();
@@ -37,6 +37,10 @@ class Inline extends Basic {
 	}
 
 	render() {
-		this.coreRender.renderText(this.text);
+		this.coreRender.renderText(this.text, this.position, this.parent.style, this.font);
+		super.render();
 	}
 }
+
+
+export default Inline;

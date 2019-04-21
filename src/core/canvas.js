@@ -88,12 +88,12 @@ const canvas = {
 		this.ctx.stroke();
 	},
 	start() {
-		this.ctx.save();
+		// this.ctx.restore();
 		this.ctx.beginPath();
 	},
 	end() {
 		this.ctx.closePath();
-		this.ctx.restore();
+		// this.ctx.restore();
 	}
 };
 

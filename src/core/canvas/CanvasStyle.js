@@ -7,7 +7,8 @@ import pick from "../../utils/pick";
 
 const defaultStyle = {
 	fillStyle: 'white',
-	strokeStyle: 'white'
+	strokeStyle: 'white',
+	textBaseline: 'top'
 };
 
 class CanvasStyle {
@@ -37,7 +38,7 @@ class CanvasStyle {
 			'shadowOffsetX',
 			'shadowOffsetY',
 			'textAlign',
-			'textBaseLineTypes',
+			'textBaseline',
 		]);
 		Object.keys(supportStyle).forEach(function (key) {
 			that.ctx[key] = supportStyle[key];
@@ -80,7 +81,7 @@ function t(ctx) {
 	ctx.shadowOffsetY = 10;
 // textAlign
 	ctx.textAlign = textAlignTypes.center;
-// textBaseLineTypes
-	ctx.textBaseLineTypes = textBaseLineTypes.middle;
+// textBaselineTypes
+	ctx.textBaselineTypes = textBaselineTypes.middle;
 }
 

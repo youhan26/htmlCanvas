@@ -5,11 +5,7 @@ import Block from "../basic/Block";
  * @type {{}}
  */
 
-class Div extends Block{
-	constructor(node) {
-		super(node, node.children);
-	}
-
+class Div extends Block {
 	render() {
 		super.render();
 	}

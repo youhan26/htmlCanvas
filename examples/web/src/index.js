@@ -64,7 +64,7 @@ canvas.resource.loadHelper('./img.jpg')
 
 canvas.render(`
 	<div style="width: 100px; height: 100px; background-color: red;">
-		<div>
+		<div style="color: black;">
 			this is test value
 		</div>
 		<div>

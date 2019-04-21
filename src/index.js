@@ -6,8 +6,6 @@ import {getStyle} from "./utils/handleUnit";
 import engine from "./core/engine";
 import {defaultCanvasSize, defaultUnit} from "./utils/constants";
 
-
-
 class Canvas {
 	constructor(el, config = {}) {
 		this.el = el;
@@ -39,8 +37,8 @@ class Canvas {
 		const styleHeight = getStyle(height, true, defaultUnit);
 		this.el.style.width = styleWidth;
 		this.el.style.height = styleHeight;
-		this.el.width = styleWidth;
-		this.el.height = styleHeight;
+		this.el.width = getStyle(width);
+		this.el.height = getStyle(height);
 	}
 
 	/**
@@ -63,17 +61,7 @@ class Canvas {
 			console.log('parse html template error');
 		}
 
-		function convertItem(node) {
-			const {children} = node;
-			if (children && children.length > 0) {
-				node.children = children.map(function (child) {
-					return convertItem(child);
-				});
-			}
-			return factory.instance(node.tagName || 'text', node);
-		}
-
-		const node = convertItem(tempNode);
+		const node = factory.instance(tempNode.tagName || 'text', tempNode, tempNode.children);
 		console.log(node);
 		node.render();
 	}

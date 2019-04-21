@@ -7,6 +7,7 @@
 import CanvasStyle from "./canvas/CanvasStyle";
 import {getStyle} from "../utils/handleUnit";
 import canvas from './canvas';
+import Font from "../style/Font";
 
 /**
  *@name Render
@@ -32,10 +33,9 @@ class Render {
 			fillStyle: color
 		};
 
-		this.canvasStyle.update(updateStyle);
-
-		const r = parseFloat(getStyle(radius));
 		canvas.start();
+		this.canvasStyle.update(updateStyle);
+		const r = parseFloat(getStyle(radius || 0));
 		canvas.renderRect(x, y, width, height, r);
 		canvas.fill();
 		canvas.end();
@@ -48,12 +48,12 @@ class Render {
 	 * @param style
 	 * @param font
 	 */
-	renderText(text, position, style, font) {
-		const {shadow, textDecoration} = style;
+	renderText(text, position, style, font = new Font()) {
+		const {shadow = {}, textDecoration, color} = style;
 		const {shadowColor, shadowOffsetX, shadowOffsetY, shadowBlur} = shadow;
 
 		const updateStyle = {
-			...style,
+			fillStyle: color,
 			font,
 		};
 		this.canvasStyle.update(updateStyle);
@@ -72,6 +72,7 @@ class Render {
 	renderImage(option) {
 
 	}
+
 	// new Path2D()
 	renderPath(path) {
 		this.ctx.beginPath();

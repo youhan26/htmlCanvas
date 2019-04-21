@@ -9,8 +9,8 @@ import {componentTypes} from "../../utils/constants";
 import {getStyle, getStyleNumber} from "../../utils/handleUnit";
 
 class Block extends Basic {
-	constructor(element, children) {
-		super(element, children);
+	constructor(element, children, parent) {
+		super(element, children, parent);
 
 		this._type = componentTypes.block;
 		this.init();
@@ -106,13 +106,13 @@ class Block extends Basic {
 	renderContent() {
 		// TODO
 	}
-	
+
 	render() {
 		this.renderMargin();
 		this.renderBorder();
 		this.renderPadding();
 		this.renderContent();
-
+		super.render();
 	}
 }
 

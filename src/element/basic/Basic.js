@@ -1,6 +1,7 @@
 import {isFunction} from "../../utils/is";
 import toCamels from "../../utils/toCamel";
 import engine from "../../core/engine";
+import factory from './../../element';
 
 
 /**
@@ -25,13 +26,17 @@ function pickElement(element = {}) {
  * Basic component
  */
 class Basic {
-	constructor(element, children) {
+	constructor(element, children = [], parent) {
 		const {style, ...others} = element;
 		const {attributes, events} = pickElement(others);
-		this.children = children;
 		this.style = toCamels(style);
 		this.events = events || {};
 		this.attributes = attributes || {};
+		this.parent = parent;
+		const that = this;
+		this.children = children.map(function (childData) {
+			return factory.instance(childData.tagName || 'text', childData, childData.children, that);
+		});
 
 		this.initEventHandle();
 		this.initLayer();
@@ -46,6 +51,14 @@ class Basic {
 	initLayer() {
 		const {zindex} = this.style;
 		// TODO handle layer
+	}
+
+	render() {
+		if (this.children && this.children.length > 0) {
+			this.children.forEach(function (child) {
+				child.render();
+			});
+		}
 	}
 }
 

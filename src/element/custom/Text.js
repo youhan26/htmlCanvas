@@ -1,20 +1,16 @@
-import Block from "../basic/Block";
+import Inline from '../basic/Inline';
 
 /**
  * basic shape: div
  * @type {{}}
  */
-class Text  extends Block{
-	constructor(node) {
-		super(node, node.children);
-	}
-
-	render(){
+class Text extends Inline {
+	render() {
 		super.render();
 	}
 }
 
-export default Text
+export default Text;
 
 
 

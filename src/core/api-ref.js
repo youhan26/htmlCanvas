@@ -6,7 +6,7 @@
 import {
 	clockwiseTypes,
 	defaultShadowBlur, fillRules, lineCapTypes, lineJoinTypes, repetitionTypes, textAlignTypes,
-	textBaseLineTypes
+	textBaselineTypes
 } from "../utils/constants";
 import Font from "../style/Font";
 
@@ -156,8 +156,8 @@ function demo(ctx) {
 	ctx.shadowOffsetY = 10;
 	// textAlign
 	ctx.textAlign = textAlignTypes.center;
-	// textBaseLineTypes
-	ctx.textBaseLineTypes = textBaseLineTypes.middle;
+	// textBaselineTypes
+	ctx.textBaselineTypes = textBaselineTypes.middle;
 }
 
 

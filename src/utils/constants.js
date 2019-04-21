@@ -85,10 +85,10 @@ export const textAlignTypes = {
 };
 
 /**
- * textBaseLineTypes
+ * textBaselineTypes
  * @type {{top: string, hanging: string, middle: string, alphabetic: string, ideographic: string, bottom: string}}
  */
-export const textBaseLineTypes = {
+export const textBaselineTypes = {
 	top: 'top', //文本基线在文本块的顶部
 	hanging: 'hanging',  //文本基线是悬挂基线
 	middle: 'middle',    //文本基线在文本块的中间
