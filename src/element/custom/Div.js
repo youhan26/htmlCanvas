@@ -30,7 +30,7 @@ class Div extends Block{
 	}
 
 	render() {
-
+		super.render();
 	}
 }
 

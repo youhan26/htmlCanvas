@@ -41,7 +41,8 @@ class Block extends Basic{
 	}
 
 	render(){
-		// super.coreRender
+		const coreRender = this.coreRender;
+		coreRender.renderRect()
 	}
 }
 

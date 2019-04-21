@@ -63,7 +63,7 @@ canvas.resource.loadHelper('./img.jpg')
 	});
 
 canvas.render(`
-	<div style="width: 10px; height: 10px; background-color: red;">
+	<div style="width: 100px; height: 100px; background-color: red;">
 		<div>
 			<img src="img1"/>
 		</div>
