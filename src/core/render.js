@@ -69,8 +69,8 @@ class Render {
 		canvas.translate(x, y);
 	}
 
-	renderImage(option) {
-
+	renderImage(image, position, style) {
+		canvas.drawImage(image)
 	}
 
 	// new Path2D()

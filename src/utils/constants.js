@@ -114,4 +114,14 @@ export const clockwiseTypes = {
 export const fillRules = {
 	nonzero: 'nonzero', // 非零规则
 	evenodd: 'evenodd'  // 奇偶规则
-}
+};
+
+
+/**
+ * css types
+ */
+export const objectFits = {
+	contain: 'contain',
+	cover: 'cover',
+	fill: 'fill'
+};

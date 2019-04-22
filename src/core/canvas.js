@@ -10,55 +10,14 @@ import {
 } from "../utils/constants";
 import {getStyle} from "../utils/handleUnit";
 
-/**
- * clearCanvas
- * @param ctx
- * @param size
- */
-function clearCanvas(ctx, size) {
-	ctx.clearRect(-size, -size, size * 2, size * 2);
-}
-
-/**
- * drawLineArea
- * @param ctx
- * @param positions
- */
-function drawLineArea(ctx, ...positions) {
-	ctx.beginPath();
-	positions.forEach(function (position, index) {
-		if (index) {
-			ctx.lineTo(position.x, position.y);
-		} else {
-			ctx.moveTo(position.x, position.y);
-		}
-	});
-}
-
-/**
- * drawRoundLineArea
- * @param ctx
- * @param x
- * @param y
- * @param r
- */
-function drawRoundLineArea(ctx, x, y, r) {
-	ctx.beginPath();
-	ctx.moveTo(positions[0].x + r, positions[0].y);
-	ctx.arcTo(positions[3].x, positions[3].y, positions[2].x, positions[2].y, r);
-	ctx.arcTo(positions[2].x, positions[2].y, positions[1].x, positions[1].y, r);
-	ctx.arcTo(positions[1].x, positions[1].y, positions[0].x, positions[0].y, r);
-	ctx.arcTo(positions[0].x, positions[0].y, positions[0].x + radius, positions[0].y, r);
-}
-
 
 const canvas = {
 	ctx: null,
 	init(ctx) {
 		this.ctx = ctx;
 	},
-	renderRect(x, y, width, height, radius) {
-		if (radius) {
+	renderRect(x, y, width, height, radius, onlyPath = false) {
+		if (radius || onlyPath) {
 			this.renderRectWidthRadius(x, y, width, height, radius);
 		} else {
 			this.ctx.fillRect(x, y, width, height);
@@ -70,6 +29,9 @@ const canvas = {
 		this.ctx.arcTo(x + width, y, x + width, y + height / 2, radius);
 		this.ctx.arcTo(x + width, y + height, x + width / 2, y + height, radius);
 		this.ctx.arcTo(x, y + height, x, y + height / 2, radius);
+	},
+	renderImage(image, ){
+		this.ctx
 	},
 	arcTo(x0, y0, x1, y1) {
 		this.ctx.arcTo(x0, y0, x1, y1);
@@ -94,7 +56,10 @@ const canvas = {
 	end() {
 		this.ctx.closePath();
 		// this.ctx.restore();
-	}
+	},
+	clear(){
+		clear(this.ctx);
+	},
 };
 
 export default canvas;
@@ -155,10 +120,9 @@ function getCanvasSize(canvas) {
 /**
  * clear canvas
  * @param ctx
- * @param canvas
  */
-function clear(ctx, canvas) {
-	const {width, height} = getCanvasSize(canvas);
+function clear(ctx) {
+	const {width, height} = getCanvasSize(ctx.canvas);
 	ctx.clearRect(0, 0, width, height);
 }
 

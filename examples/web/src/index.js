@@ -68,7 +68,7 @@ canvas.render(`
 			this is test value
 		</div>
 		<div>
-			<img src="img1"/>
+			<img src="img1" style="width: 50px;height: 100px;border-radius: 6px;object-fit: cover;"/>
 		</div>
 	</div>
 `);

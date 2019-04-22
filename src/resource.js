@@ -33,7 +33,7 @@ class Resource {
 		return new Promise(function (resolve, reject) {
 			const img = new Image();
 			img.onload = function (source) {
-				resolve(source);
+				resolve(img);
 			};
 			img.src = url;
 		});
