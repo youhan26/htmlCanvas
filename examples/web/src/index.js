@@ -53,16 +53,15 @@
 //
 // layer2.distory();
 
-import Canvas from 'htmlCanvas';
+import Canvas, {resource} from 'htmlCanvas';
 
 const canvas = new Canvas(document.getElementById('canvasId'), {width: 500, height: 500});
 
-canvas.resource.loadHelper('./img.jpg')
+resource.loadHelper('./img.jpg')
 	.then(function (resource) {
-		canvas.resource.addResource('img1', resource);
-	});
+		resource.addResource('img1', resource);
 
-canvas.render(`
+		canvas.render(`
 	<div style="width: 100px; height: 100px; background-color: red;">
 		<div style="color: black;">
 			this is test value
@@ -72,3 +71,7 @@ canvas.render(`
 		</div>
 	</div>
 `);
+
+
+	});
+

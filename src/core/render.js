@@ -69,8 +69,11 @@ class Render {
 		canvas.translate(x, y);
 	}
 
-	renderImage(image, position, style) {
-		canvas.drawImage(image)
+	renderImage(image, {x, y}, style) {
+		let {width = image.width, height = image.height} = style;
+		width = getStyle(width);
+		height = getStyle(width);
+		canvas.renderImage(image, x, y, width, height);
 	}
 
 	// new Path2D()

@@ -1,3 +1,5 @@
+import logger from "./logger";
+
 class Resource {
 	constructor(onReady) {
 		this.pool = new Map();
@@ -35,6 +37,9 @@ class Resource {
 			img.onload = function (source) {
 				resolve(img);
 			};
+			img.onerror = function (error) {
+				console.log(error);
+			};
 			img.src = url;
 		});
 	}
@@ -51,6 +56,20 @@ class Resource {
 		});
 	}
 
+	/**
+	 * getResourceByName
+	 * @param name
+	 * @returns {*}
+	 */
+	getResourceByName(name) {
+		const data = this.pool.get(name);
+		// TODO check data is loading?
+		if (!data) {
+			logger.error('no resource ', name);
+			return null;
+		}
+		return data;
+	}
 
 	addResource(name, source) {
 		this.pool.set(name, source);
@@ -79,4 +98,12 @@ class Resource {
 	}
 }
 
-export default Resource;
+function sourceLoadFinish() {
+	//TODO check queue
+	console.log('source load finish');
+}
+
+const resource = new Resource(sourceLoadFinish);
+
+export default resource;
+

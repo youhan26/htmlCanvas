@@ -1,3 +1,5 @@
+import Source from '../basic/Source';
+
 /**
  * basic shape: div
  * @type {{}}
@@ -8,21 +10,18 @@ const componentTypes = {
 	abstract: 'abstract'
 };
 
-class Img {
-	constructor() {
-		this.children = [];
-		this.style = {};
-		this.events = {};
-
+class Img extends Source {
+	constructor(element, children, parent) {
+		super(element, children, parent);
 		this._type = componentTypes.component;
 	}
 
-	render(){
-
+	render() {
+		super.render();
 	}
 }
 
-export default Img
+export default Img;
 
 
 

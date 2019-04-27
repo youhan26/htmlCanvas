@@ -2,6 +2,7 @@ import {isFunction} from "../../utils/is";
 import toCamels from "../../utils/toCamel";
 import engine from "../../core/engine";
 import factory from './../../element';
+import idGenerator from "../../utils/idGenerator";
 
 
 /**
@@ -29,6 +30,7 @@ class Basic {
 	constructor(element, children = [], parent) {
 		const {style, ...others} = element;
 		const {attributes, events} = pickElement(others);
+		this._id = idGenerator();
 		this.style = toCamels(style);
 		this.events = events || {};
 		this.attributes = attributes || {};

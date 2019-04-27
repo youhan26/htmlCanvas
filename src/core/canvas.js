@@ -30,8 +30,8 @@ const canvas = {
 		this.ctx.arcTo(x + width, y + height, x + width / 2, y + height, radius);
 		this.ctx.arcTo(x, y + height, x, y + height / 2, radius);
 	},
-	renderImage(image, ){
-		this.ctx
+	renderImage(image, x, y, width, height){
+		this.ctx.drawImage(image, x, y, width, height);
 	},
 	arcTo(x0, y0, x1, y1) {
 		this.ctx.arcTo(x0, y0, x1, y1);
